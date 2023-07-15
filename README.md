@@ -1,6 +1,8 @@
 # Checkmint v0.1 - Checked Variables Library for C++
 
-Checkmint is a lightweight header-only library for C++ that provides a proof-of-concept for checked variables, allowing you to enforce constraints and ensure data integrity in your code. It offers a convenient way to incorporate compile and runtime checks and enhance design-by-contract programming.
+Checkmint is a lightweight header-only library for C++20 that provides a proof-of-concept for checked variables, allowing you to enforce constraints and ensure data integrity in your code. It offers a convenient way to incorporate compile and runtime checks and enhance design-by-contract programming.
+
+
 
 ## Features
 
@@ -83,3 +85,6 @@ int main()
     return 0;
 }
 ```
+## Compilers supported
+
+Tested on CLANG 16 and GCC 13.1
