@@ -13,6 +13,12 @@ Checkmint is a lightweight header-only library for C++ that provides a proof-of-
 
 Validators are stateless and need to be defined following a specific convention.
 
+All examples assume
+
+```cpp
+namespace cm = checkmint;
+```
+
 Multiple validators are supported 
 
 ```cpp
