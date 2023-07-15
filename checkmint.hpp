@@ -130,13 +130,6 @@ public:
         return CheckedVar<T, Us...>(m_val);
     }    
 
-    constexpr CheckedVar<T, Ts...>& operator=(int v)
-    {
-        check_invariants<Ts...>(v);        
-        m_val = v;
-        return *this;
-    }    
-
     template <typename... Us>
         requires IsSubset<type_list<Ts...>, type_list<Us...>>    
     constexpr CheckedVar<T, Ts...>& operator=(const CheckedVar<T, Us...>& v)
