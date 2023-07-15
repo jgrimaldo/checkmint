@@ -16,13 +16,31 @@ Validators are stateless and need to be defined following a specific convention.
 All examples assume
 
 ```cpp
+#include <checkmint/checkmint.hpp>
 namespace cm = checkmint;
 ```
 
 Multiple validators are supported 
 
 ```cpp
+struct ZeroOrPositive { 
+    constexpr void operator()(int v) { 
+        CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v >= 0, "Value smaller than zero"); }
+};
+
+struct Positive { 
+    constexpr void operator()(int v) 
+        { CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v > 0, "Value smaller than zero"); }
+};
+
+struct NonZero { 
+    constexpr void operator()(int v) { 
+        CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v != 0, "Value is zero"); }
+};
+
+int main() {
     cm::CheckedVar<int, ZeroOrPositive, Positive> valid_1(5);
+}
 ```
 
 A more complex example 
