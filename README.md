@@ -85,6 +85,20 @@ int main()
     return 0;
 }
 ```
+
+In the aforementioned example you get a simple compile-error message (GCC)
+
+```cpp
+<source>: In function 'int main()':
+<source>:346:72:   in 'constexpr' expansion of 'checkmint::CheckedVar<std::tuple<int, int, int>, ElementsAscending<int, int, int> >(std::tuple<int, int, int>(1, 4, 3))'
+<source>:88:32:   in 'constexpr' expansion of 'checkmint::check_invariants<ElementsAscending<int, int, int>, std::tuple<int, int, int> >(((checkmint::CheckedVar<std::tuple<int, int, int>, ElementsAscending<int, int, int> >*)this)->checkmint::CheckedVar<std::tuple<int, int, int>, ElementsAscending<int, int, int> >::m_val)'
+<source>:231:10:   in 'constexpr' expansion of 'ElementsAscending<int, int, int>().ElementsAscending<int, int, int>::operator()((* & v))'
+<source>:325:41:   in 'constexpr' expansion of '((ElementsAscending<int, int, int>*)this)->ElementsAscending<int, int, int>::check_elements<0, 3>((* & tuple))'
+<source>:335:45:   in 'constexpr' expansion of '((ElementsAscending<int, int, int>*)this)->ElementsAscending<int, int, int>::check_elements<1, 3>((* & tuple))'
+<source>:13:101: error: call to non-'constexpr' function 'int checkmint::invariant_violation(const std::string&)'
+   13 |   #define CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(cond, msg) if (!(cond)) checkmint::invariant_violation(msg)
+```
+
 ## Compilers supported
 
 Tested on CLANG 16 and GCC 13.1
