@@ -46,7 +46,7 @@ int divide(int numerator, Denominator<int> d)
 int main() {
     cm::CheckedVar<int, NonZero, Positive> valid_1(5); // OK
     cm::CheckedVar<int, NonZero, Positive> valid_1(0); // Run-time error
-    constexpr cm::CheckedVar<int, NonZero, Positive> valid_1(0); // Compile-time error
+    constexpr cm::CheckedVar<int, NonZero, Positive> valid_1(-1); // Compile-time error
 }
 ```
 
