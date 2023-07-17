@@ -25,11 +25,6 @@ namespace cm = checkmint;
 Multiple validators are supported 
 
 ```cpp
-struct ZeroOrPositive { 
-    constexpr void operator()(int v) { 
-        CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v >= 0, "Value smaller than zero"); }
-};
-
 struct Positive { 
     constexpr void operator()(int v) 
         { CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v > 0, "Value smaller than zero"); }
@@ -40,8 +35,18 @@ struct NonZero {
         CHECKMINT_SIGNAL_VIOLATION_IF_FALSE(v != 0, "Value is zero"); }
 };
 
+template <typename T>
+using Denominator = cm::CheckedVar<T, NonZero>;
+
+int divide(int numerator, Denominator<int> d)
+{
+  return numerator / d.value(); 
+}
+
 int main() {
-    cm::CheckedVar<int, ZeroOrPositive, Positive> valid_1(5);
+    cm::CheckedVar<int, NonZero, Positive> valid_1(5); // OK
+    cm::CheckedVar<int, NonZero, Positive> valid_1(0); // Run-time error
+    constexpr cm::CheckedVar<int, NonZero, Positive> valid_1(0); // Compile-time error
 }
 ```
 
